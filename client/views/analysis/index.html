@@ -1,0 +1,41 @@
+<%- include('../layout/header.html'); %>
+
+<h1 class="head-title">Analysis List</h1>
+
+
+<a href="/analysis/create" class="btn btn-success float-right">
+	<span class="icon ion-ios-plus-outline"></span> New
+</a>
+<br><br><br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Author</th>
+      <th scope="col">Date</th>
+      <th scope="col">Progress</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>SNP 221233</td>
+      <td>Daniel Ramirez</td>
+      <td>11/12/2017</td>
+      <td>75%</td>
+      <td>
+      	<a href="/analysis/1/report" class="btn btn-primary">
+      		<span class="icon ion-stats-bars"></span>
+      	</a>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+<%- include('../layout/footer.html'); %>

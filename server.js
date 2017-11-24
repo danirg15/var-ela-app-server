@@ -51,9 +51,9 @@ app.engine('html', ejs.renderFile)
 //--------------------------------------------
 //		Routing
 //--------------------------------------------
-app.get('/', function (req, res) {
-  res.render('index');
-});
+app.get('/', (req, res) => {
+	res.redirect('/analysis')
+}) 
 
 // app.use('/api', require('./routes/auth.routes'))
 // app.use('/api', auth, require('./routes/user.routes'))
