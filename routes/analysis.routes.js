@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 	  .catch(function (error) {
 	  	req.flash('status', 'error')
 	  	req.flash('info', 'Cannot retrieve analyses from data server. Check connection.')
-	    res.render('analysis/index')
+	    res.render('analysis/index', {'analyses': []})
 	  });
 })
 

@@ -1,0 +1,46 @@
+<%- include('../layout/header.html'); %>
+
+
+<h1 class="head-title">Status</h1>
+
+
+<form>
+  <div class="form-group row">
+    <label for="host" class="col-sm-2 col-form-label">Host</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="host" placeholder="">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="port" class="col-sm-2 col-form-label">Port</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" name="port" placeholder="">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="token" class="col-sm-2 col-form-label">Access Token</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="">
+    </div>
+  </div>
+  
+  <br><br>
+  <div class="form-group row">
+    <div class="offset-md-3 col-sm-3">
+      <button type="button" id="test-connection" class="btn btn-success btn-block">
+      	<span class="icon ion-ios-pulse-strong"></span>
+      	Test Connection
+      </button>
+    </div>
+    <div class="col-sm-3">
+      <button type="submit" class="btn btn-primary btn-block">
+      	Save
+      	<span class="icon ion-checkmark"></span>
+      </button>
+    </div>
+  </div>
+</form>
+
+<%- include('../inc/go-back.html', {'url': '/analysis'}); %>
+
+<%- include('../layout/footer.html'); %>

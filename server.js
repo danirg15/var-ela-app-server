@@ -61,6 +61,7 @@ app.get('/', (req, res) => {
 // app.use('/api', require('./routes/auth.routes'))
 // app.use('/api', auth, require('./routes/user.routes'))
 app.use('/analysis', require('./routes/analysis.routes'))
+app.use('/data-server-connection', require('./routes/data_server_connection.routes'))
 
 
 //--------------------------------------------
@@ -78,9 +79,6 @@ server.listen(port, function(err) {
 	if (err) throw err
 	console.log('Server running on port: ' + port)
 })
-
-
-
 
 
 
