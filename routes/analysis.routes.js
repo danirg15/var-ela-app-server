@@ -1,10 +1,19 @@
+const axios = require('axios')
 let router = require('express').Router()
-let UserController = require('../controllers/UserController')
-let validate = require('express-validation');
-let validators = require('./validators');
+const validate = require('express-validation');
+const validators = require('./validators');
+const data_server_endpoint = process.env.DATA_SERVER_API_ENDPOINT
 
 router.get('/', (req, res) => {
-	res.render('analysis/index')
+	axios.get(data_server_endpoint+'/api/analysis')
+	  .then(function (response) {
+	    res.render('analysis/index', {'analyses': response.data})
+	  })
+	  .catch(function (error) {
+	  	req.flash('status', 'error')
+	  	req.flash('info', 'Cannot retrieve analyses from data server. Check connection.')
+	    res.render('analysis/index')
+	  });
 })
 
 router.get('/:id/report', (req, res) => {
@@ -16,11 +25,24 @@ router.get('/create', (req, res) => {
 })
 
 router.post('/create', validate(validators.analysis.full), (req, res) => {
-	console.log(req.body)
-	// UserController.store(req.body, (err) => {
-	// 	if (err) res.status(500).json(err)
- //        else res.status(201).json({'message': 'Register successfuly'})
-	// })
+	let data = {
+		'title': req.body.title,
+		'description': req.body.description,
+		'author': 'Daniel Ramirez',
+		'config': req.body
+	}
+
+	axios.post(data_server_endpoint+'/api/analysis', data)
+	  .then(function (response) {
+	  	req.flash('status', 'success')
+	  	req.flash('info', 'Analysis submitted successfully')
+	    res.redirect('/')
+	  })
+	  .catch(function (error) {
+	  	req.flash('status', 'error')
+	  	req.flash('info', 'Something went wrong while creating the new analysis. ' + error)
+	    res.redirect('/')
+	  });
 })
 
 

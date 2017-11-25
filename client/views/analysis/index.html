@@ -1,5 +1,6 @@
 <%- include('../layout/header.html'); %>
 
+
 <h1 class="head-title">Analysis List</h1>
 
 
@@ -20,22 +21,23 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>SNP 221233</td>
-      <td>Daniel Ramirez</td>
-      <td>11/12/2017</td>
-      <td>75%</td>
-      <td>
-      	<a href="/analysis/1/report" class="btn btn-primary">
-      		<span class="icon ion-stats-bars"></span>
-      	</a>
-      </td>
-    </tr>
+    <% analyses.forEach(function(analysis) { %>  
+      <tr>
+        <th scope="row"></th>
+        <td><%= analysis.title %></td>
+        <td><%= analysis.author %></td>
+        <td><%= analysis.createdAt %></td>
+        <td><%= analysis.progress.percent %> %</td>
+        <td>
+        	<a href="/analysis/<%= analysis._id %>/report" class="btn btn-primary">
+        		<span class="icon ion-stats-bars"></span>
+        	</a>
+        </td>
+      </tr>
+    <% }) %>
     
   </tbody>
 </table>
-
 
 
 <%- include('../layout/footer.html'); %>

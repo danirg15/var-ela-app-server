@@ -4,7 +4,7 @@ module.exports = {
 	full: {
 		  body: {
 		    'title':       		Joi.string().required(),
-		    'description':    	Joi.string().optional(),
+		    'description':    	Joi.string().optional().allow(''),
 		    'min-mean-dp':   	Joi.number().optional().allow(''),
 		    'max-mean-dp':   	Joi.number().optional().allow(''),
 		    'remove-non-passing-sites': Joi.boolean().optional().allow(''),

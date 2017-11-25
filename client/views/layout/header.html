@@ -44,6 +44,19 @@
       </div>
     </div>
     
+
+    <% if(messages.status && messages.status == 'success') { %>
+        <div class="alert alert-success text-center" role="alert">
+          <%= messages.info %>
+        </div>
+    <% } %>
+
+    <% if(messages.status && messages.status == 'error') { %>
+        <div class="alert alert-danger text-center" role="alert">
+          <%= messages.info %>
+        </div>
+    <% } %>
+
     <div class="container">
     	
 

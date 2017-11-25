@@ -14,7 +14,9 @@ const config = 			require('config')
 const moment_tz = 		require('moment-timezone')
 const helmet = 			require('helmet')
 const ejs =				require('ejs')
-
+const flash = 			require('express-flash')
+ 
+  
 //--------------------------------------------
 //		Middlewares
 //--------------------------------------------
@@ -22,6 +24,7 @@ app.use(helmet())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(session({ secret: process.env.APP_KEY, resave: false, saveUninitialized: false }));
+app.use(flash())
 
 //--------------------------------------------
 //		Configuration
