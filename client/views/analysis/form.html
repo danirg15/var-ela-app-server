@@ -3,7 +3,7 @@
 
 <h1 class="head-title">New Analysis</h1>
 
-<form action="/analysis" method="POST">
+<form action="/analysis/create" method="POST">
 
   <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">Title</label>
@@ -72,7 +72,7 @@
     <div class="col-sm-10">
       <div class="form-check">
         <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="keep-only-indels" value="1">
+          <input class="form-check-input" type="radio" name="keep-only-indels" value="true">
           Keep only indels
 
           <span class="icon ion-ios-help-outline" data-toggle="popover" title="Only Indels" data-content="Include sites that contain an indel. For these options 'indel' means any variant that alters the length of the REF allele."></span>
@@ -80,7 +80,7 @@
       </div>
       <div class="form-check">
         <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="keep-only-indels" value="0">
+          <input class="form-check-input" type="radio" name="keep-only-indels" value="false">
           Remove indels
 
           <span class="icon ion-ios-help-outline" data-toggle="popover" title="Remove Indels" data-content="Exclude sites that contain an indel. For these options 'indel' means any variant that alters the length of the REF allele."></span>
@@ -99,7 +99,7 @@
       <span class="icon ion-ios-help-outline" data-toggle="popover" title="Min MAF" data-content="Include only sites with a Minor Allele Frequency greater than or equal to the '--maf' value. This option may be used without the other. Allele frequency is defined as the number of times an allele appears over all individuals at that site, divided by the total number of non-missing alleles at that site."></span>
     </label>
     <div class="col-sm-10">
-      <input type="number" class="form-control" name="min-maf" placeholder="">
+      <input type="text" class="form-control" name="min-maf" placeholder="">
     </div>
   </div>
   <div class="form-group row">
@@ -109,7 +109,7 @@
       <span class="icon ion-ios-help-outline" data-toggle="popover" title="Max MAF" data-content="Include only sites with a Minor Allele Frequency less than or equal to the '--max-maf' value. This option may be used without the other. Allele frequency is defined as the number of times an allele appears over all individuals at that site, divided by the total number of non-missing alleles at that site."></span>
     </label>
     <div class="col-sm-10">
-      <input type="number" class="form-control" name="max-maf" placeholder="">
+      <input type="text" class="form-control" name="max-maf" placeholder="">
     </div>
   </div>
 
