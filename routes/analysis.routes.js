@@ -11,13 +11,23 @@ router.get('/', (req, res) => {
 	  })
 	  .catch(function (error) {
 	  	req.flash('status', 'error')
-	  	req.flash('info', 'Cannot retrieve analyses from data server. Check connection.')
+	  	req.flash('info', 'Cannot retrieve analyses from data server. Check out connection.')
 	    res.render('analysis/index', {'analyses': []})
 	  });
 })
 
 router.get('/:id/report', (req, res) => {
-	res.render('analysis/report')
+
+	axios.get(data_server_endpoint+'/api/analysis/'+req.params.id)
+	  .then(function (response) {
+	    res.render('analysis/report', {'analysis': response.data})
+	  })
+	  .catch(function (error) {
+	  	req.flash('status', 'error')
+	  	req.flash('info', 'Cannot retrieve analysis from data server. Check out connection.')
+	    res.render('analysis/index', {'analyses': []})
+	  });
+
 })
 
 router.get('/create', (req, res) => {
@@ -25,12 +35,17 @@ router.get('/create', (req, res) => {
 })
 
 router.post('/create', validate(validators.analysis.full), (req, res) => {
+
 	let data = {
 		'title': req.body.title,
 		'description': req.body.description,
 		'author': 'Daniel Ramirez',
 		'config': req.body
 	}
+
+	//Hardcoded files
+	data.config.input_file = 'LP6008242-DNA_A01.genome.vcf.gz'
+	data.config.output_file = 'LP6008242-DNA_A01.genome.output.vcf.gz'
 
 	axios.post(data_server_endpoint+'/api/analysis', data)
 	  .then(function (response) {

@@ -3,16 +3,14 @@
 
 <h1 class="head-title">Report</h1>
 
-<%- include('../inc/stages.html'); %>
+<%- include('../inc/stages.html', {'stages': analysis.stages}); %>
 
 
-<div class="col-md-6">
+<%- JSON.stringify(analysis) %>
+
+<!-- <div class="col-md-6">
     <canvas id="myChart"></canvas>
-
-</div>
-
-
-
+</div> -->
 
 
 

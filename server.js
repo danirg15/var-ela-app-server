@@ -77,7 +77,7 @@ const server = http.createServer(app)
 
 server.listen(port, function(err) {
 	if (err) throw err
-	console.log('Server running on port: ' + port)
+	console.log('APP Server running on port: ' + port)
 })
 
 
