@@ -58,9 +58,9 @@ app.get('/', (req, res) => {
 	res.redirect('/analysis')
 }) 
 
-// app.use('/api', require('./routes/auth.routes'))
-// app.use('/api', auth, require('./routes/user.routes'))
+
 app.use('/analysis', require('./routes/analysis.routes'))
+app.use('/sites', require('./routes/sites.routes'))
 app.use('/data-server-connection', require('./routes/data_server_connection.routes'))
 
 

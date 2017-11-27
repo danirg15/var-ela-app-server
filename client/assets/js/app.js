@@ -11,13 +11,43 @@ $("#test-connection").click(function() {
     $.ajax({
        type: 'HEAD',
        url: url,
-        success: function(data) {
-            alert(url + ': Success')
-        },
+       success: function(data) {
+          alert(url + ': Success')
+       },
        error: function() {
-            alert(url + ': Fail')
+          alert(url + ': Fail')
        }
     });
 
 }) 
+
+
+$('#search-sites').click(function() {
+    var params = $("#searchfield-sites").val()
+
+    var query = {}
+    if (params) {
+        $.each(params.split(','), function(i, param) {
+            var field = param.split('=')[0].trim()
+            var value = param.split('=')[1].trim()
+            query[field] = value
+        })
+    }
+        
+    $.ajax({
+        url: '/sites',
+        type: 'GET',
+        data: query,
+        success: function(res) { 
+          $('#search-sites-results').html(res)
+        },
+        error: function() { 
+          alert('Failed!')
+        },
+    });
+    
+})
+
+
+
 
