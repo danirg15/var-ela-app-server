@@ -9,10 +9,10 @@
       <th scope="col">REF</th>
       <th scope="col">ALT</th>
       <th scope="col">QUAL</th>
+      <th scope="col">GENE</th>
       <th scope="col">FILTER</th>
       <th scope="col">INFO</th>
       <th scope="col">FORMAT</th>
-      <th scope="col">DATA</th>
     </tr>
   </thead>
   <tbody>
@@ -24,10 +24,13 @@
         <td><%= site.REF %></td>
         <td><%= site.ALT %></td>
         <td><%= site.QUAL %></td>
+        <td><%= site.GENE %></td>
         <td><%= site.FILTER %></td>
         <td><%= site.INFO %></td>
-        <td><%= site.FORMAT %></td>
-        <td><%= site.DATA %></td>
+        <td>
+          <%= site.FORMAT %><br>
+          <%= site.DATA %>
+        </td>
       </tr>
     <% }) %>
   </tbody>
