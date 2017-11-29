@@ -11,27 +11,48 @@
       <th scope="col">QUAL</th>
       <th scope="col">GENE</th>
       <th scope="col">FILTER</th>
-      <th scope="col">INFO</th>
-      <th scope="col">FORMAT</th>
+      <th scope="col">Clinvar</th>
+      <th scope="col">Cosmic</th>
+      <!-- <th scope="col">INFO</th>
+      <th scope="col">FORMAT</th> -->
     </tr>
   </thead>
   <tbody>
+
     <% sites.forEach(function(site) { %>  
       <tr>
         <td><%= site.CHROM %></td>
         <td><%= site.POS %></td>
-        <td><%= site.ID %></td>
+        <td>
+          <% site.ID.forEach(function(id) { %>  
+            <a target="_blank" href="https://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=<%= id %>">
+              <%= id %>
+            </a>
+            <br>
+          <% }) %> 
+        </td>
         <td><%= site.REF %></td>
         <td><%= site.ALT %></td>
         <td><%= site.QUAL %></td>
-        <td><%= site.GENE %></td>
+        <td>
+          <a target="_blank" href="http://www.genecards.org/cgi-bin/carddisp.pl?gene=<%= site.GENE %>">
+            <%= site.GENE %>
+          </a>
+        </td>
         <td><%= site.FILTER %></td>
-        <td><%= site.INFO %></td>
+        <td><%= site.clinical_annotation.clinvar %></td>          
+        <td><%= site.clinical_annotation.cosmic %></td>          
+        <!-- <td>
+          <% site.INFO.forEach(function(info) { %>  
+            <%= info %><br>
+          <% }) %>            
+        </td>
         <td>
           <%= site.FORMAT %><br>
           <%= site.DATA %>
-        </td>
+        </td> -->
       </tr>
     <% }) %>
   </tbody>
 </table>
+

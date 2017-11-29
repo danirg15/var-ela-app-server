@@ -42,7 +42,7 @@ router.post('/create', validate(validators.analysis.full), (req, res) => {
 		'author': 'Daniel Ramirez',
 		'config': req.body
 	}
-
+	
 	//Hardcoded files
 	data.config.input_file = 'LP6008242-DNA_A01.genome.vcf.gz'
 	data.config.output_file = 'LP6008242-DNA_A01.genome.output.vcf.gz'

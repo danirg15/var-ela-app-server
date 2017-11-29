@@ -23,13 +23,13 @@
   <h5 class="form-title">Genotype Value Filtering</h5>
   <hr>
   <div class="form-group row">
-    <label for="min mean DP" class="col-sm-2 col-form-label">
-      Min. Mean DP
+    <label for="min DP" class="col-sm-2 col-form-label">
+      Min. DP
 
-      <span class="icon ion-ios-help-outline" data-toggle="popover" title="Min DP" data-content="Includes only sites with mean depth values (over all included individuals) greater than or equal to the '--min-meanDP' value. These option require that the 'DP' FORMAT tag is included for each site."></span>
+      <span class="icon ion-ios-help-outline" data-toggle="popover" title="Min DP" data-content="Includes only sites with mean depth values (over all included individuals) greater than or equal to the Min-DP value. These option require that the 'DP' FORMAT tag is included for each site."></span>
     </label>
     <div class="col-sm-10">
-      <select class="form-control" name="min-mean-dp">
+      <select class="form-control" name="min-dp">
         <option value=""></option>
         <% for(let i = 3; i <= 10; i++){ %>
           <option value="<%= i %>"><%= i %></option>
@@ -39,13 +39,13 @@
   </div>
 
   <div class="form-group row">
-    <label for="max mean DP" class="col-sm-2 col-form-label">
-      Max. Mean DP
+    <label for="max DP" class="col-sm-2 col-form-label">
+      Max. DP
 
-      <span class="icon ion-ios-help-outline" data-toggle="popover" title="Max DP" data-content="Includes only sites with mean depth values (over all included individuals) less than or equal to the '--max-meanDP' value. These option require that the 'DP' FORMAT tag is included for each site."></span>
+      <span class="icon ion-ios-help-outline" data-toggle="popover" title="Max DP" data-content="Includes only sites with mean depth values (over all included individuals) less than or equal to the Max-DP value. These option require that the 'DP' FORMAT tag is included for each site."></span>
     </label>
     <div class="col-sm-10">
-      <select class="form-control" name="max-mean-dp">
+      <select class="form-control" name="max-dp">
         <option value=""></option>
         <% for(let i = 3; i <= 10; i++){ %>
           <option value="<%= i %>"><%= i %></option>
@@ -68,26 +68,47 @@
 
   <h5 class="form-title">Variant Type Filtering</h5>
   <hr>
-  <fieldset class="form-group row">
-    <div class="col-sm-10">
+  <small class="form-text text-muted">
+    *Inlcludes all variants by default
+  </small>
+  <br>
+  <div class="form-group row">
+    <div class="col-sm-1">
       <div class="form-check">
         <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="keep-only-indels" value="true">
-          Keep only indels
-
-          <span class="icon ion-ios-help-outline" data-toggle="popover" title="Only Indels" data-content="Include sites that contain an indel. For these options 'indel' means any variant that alters the length of the REF allele."></span>
-        </label>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="radio" name="keep-only-indels" value="false">
-          Remove indels
-
-          <span class="icon ion-ios-help-outline" data-toggle="popover" title="Remove Indels" data-content="Exclude sites that contain an indel. For these options 'indel' means any variant that alters the length of the REF allele."></span>
+          <input class="form-check-input" name="site-types" value="snp" type="checkbox"> SNP
         </label>
       </div>
     </div>
-  </fieldset>
+    <div class="col-sm-1">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" name="site-types" value="indel" type="checkbox"> Indel
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-1">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" name="site-types" value="mnp" type="checkbox"> MNP
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-1">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" name="site-types" value="ref" type="checkbox"> REF
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-1">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" name="site-types" value="bnd" type="checkbox"> BND
+        </label>
+      </div>
+    </div>
+  </div>
 
 
   <h5 class="form-title">Allele Filtering</h5>
@@ -123,8 +144,8 @@
     <div class="col-sm-10">
       <select class="form-control" name="min-quality">
         <option></option>
-        <% for(let i = 10; i <= 100; i+=10){ %>
-          <option value="<%= i %>"><%= i %>%</option>
+        <% for(let i = 10; i <= 300; i+=10){ %>
+          <option value="<%= i %>"><%= i %></option>
         <% } %>
       </select>
     </div>
