@@ -8,11 +8,16 @@ $("#test-connection").click(function() {
     var port = $('#port').val()
     var url = host + ':' + port
 
+    var sendDate = (new Date()).getTime();
+
     $.ajax({
        type: 'HEAD',
        url: url,
        success: function(data) {
-          alert(url + ': Success')
+          var receiveDate = (new Date()).getTime();
+          var responseTimeMs = receiveDate - sendDate
+
+          alert(url + ': Success. Response Time: ' + responseTimeMs + 'ms')
        },
        error: function() {
           alert(url + ': Fail')

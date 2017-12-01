@@ -35,22 +35,28 @@
         <td><%= site.ALT %></td>
         <td><%= site.QUAL %></td>
         <td>
-          <a target="_blank" href="http://www.genecards.org/cgi-bin/carddisp.pl?gene=<%= site.GENE %>">
-            <%= site.GENE %>
-          </a>
+          <% site.GENE.forEach(function(gene) { %>  
+            <a target="_blank" href="http://www.genecards.org/cgi-bin/carddisp.pl?gene=<%= gene %>">
+              <%= gene %>
+            </a>
+            <br>
+          <% }) %> 
+          
         </td>
         <td><%= site.FILTER %></td>
         <td><%= site.clinical_annotation.clinvar %></td>          
         <td><%= site.clinical_annotation.cosmic %></td>          
-        <!-- <td>
+        <td>
           <% site.INFO.forEach(function(info) { %>  
-            <%= info %><br>
+            <% if(info.split('=')[1] != '.') { %>
+              <%= info %><br>
+            <% } %>
           <% }) %>            
         </td>
         <td>
           <%= site.FORMAT %><br>
           <%= site.DATA %>
-        </td> -->
+        </td>
       </tr>
     <% }) %>
   </tbody>
