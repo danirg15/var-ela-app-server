@@ -1,18 +1,33 @@
+<%- JSON.stringify(stages) %>
+
 
 <ol class="progress-steps progress-steps--large">
-  <li class="is-complete" data-step="1">
+  <li class="<%= stages.submit ? 'is-complete' : '' %>" data-step="1">
     Submit
   </li>
-  <li class="is-complete" data-step="2">
+  <li class="<%= stages.filtering ? 'is-complete' : '' %> 
+             <%= stages.submit && !stages.filtering ? 'is-active' : '' %>" 
+             data-step="2">
     Filtering
   </li>
-  <li class="is-active" data-step="3">
+  <li class="<%= stages.annotating ? 'is-complete' : '' %> 
+             <%= stages.filtering && !stages.annotating ? 'is-active' : '' %>" 
+             data-step="3">
     Annotating
   </li>
-  <li class="" data-step="4">
+  <li class="<%= stages.stats ? 'is-complete' : '' %> 
+             <%= stages.annotating && !stages.stats ? 'is-active' : '' %>" 
+             data-step="4">
     Stats
   </li>
-  <li data-step="5" class="progress-steps__last">
+  <li class="<%= stages.import ? 'is-complete' : '' %> 
+             <%= stages.stats && !stages.import ? 'is-active' : '' %>" 
+             data-step="5">
+    Import
+  </li>
+  <li data-step="6" class="progress-steps__last
+                           <%= stages.completed ? 'is-complete' : '' %> 
+                           <%= stages.import && !stages.completed ? 'is-active' : '' %>">
     Completed
   </li>
 </ol>

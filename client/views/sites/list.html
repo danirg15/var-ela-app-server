@@ -11,8 +11,8 @@
       <th scope="col">QUAL</th>
       <th scope="col">GENE</th>
       <th scope="col">FILTER</th>
-      <th scope="col">Clinvar</th>
-      <th scope="col">Cosmic</th>
+      <!-- <th scope="col">Clinvar</th>
+      <th scope="col">Cosmic</th> -->
       <!-- <th scope="col">INFO</th>
       <th scope="col">FORMAT</th> -->
     </tr>
@@ -25,10 +25,12 @@
         <td><%= site.POS %></td>
         <td>
           <% site.ID.forEach(function(id) { %>  
-            <a target="_blank" href="https://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=<%= id %>">
-              <%= id %>
-            </a>
-            <br>
+              <% if(id != '.') { %>
+                <a target="_blank" href="https://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=<%= id %>">
+                  <%= id %>
+                </a>
+                <br>
+              <% } %>
           <% }) %> 
         </td>
         <td><%= site.REF %></td>
@@ -47,15 +49,20 @@
         <td><%= site.clinical_annotation.clinvar %></td>          
         <td><%= site.clinical_annotation.cosmic %></td>          
         <td>
-          <% site.INFO.forEach(function(info) { %>  
+          <!-- <% site.INFO.forEach(function(info) { %>  
             <% if(info.split('=')[1] != '.') { %>
               <%= info %><br>
             <% } %>
-          <% }) %>            
+          <% }) %>       -->      
         </td>
         <td>
           <%= site.FORMAT %><br>
           <%= site.DATA %>
+        </td>
+        <td>
+          <a href="/sites/detail/<%= site._id %>">
+            Detail
+          </a>
         </td>
       </tr>
     <% }) %>

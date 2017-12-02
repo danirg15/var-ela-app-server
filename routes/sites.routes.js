@@ -17,5 +17,15 @@ router.get('/', (req, res) => {
 })
 
 
+router.get('/detail/:id', (req, res) => {
+	axios.get(data_server_endpoint+'/api/sites/'+req.params.id)
+	  .then(function (response) {
+	    res.render('sites/detail', {'site': response.data})
+	  })
+	  .catch(function (error) {
+	  	alert('Error: ' + error)
+	  });
+})
+
 
 module.exports = router;

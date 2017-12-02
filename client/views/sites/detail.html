@@ -1,0 +1,17 @@
+<%- include('../layout/header.html'); %>
+
+
+<h1 class="head-title">Detail</h1>
+
+
+<% site.INFO.forEach(function(info) { %>  
+  <% if(info.split('=')[1] != '.') { %>
+    <%= info %><br>
+  <% } %>
+<% }) %>           
+
+
+
+<%- include('../inc/go-back.html', {'url': '/analysis/'+site.analysis+'/report'}); %>
+
+<%- include('../layout/footer.html'); %>
