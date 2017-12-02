@@ -45,7 +45,9 @@ router.post('/create', validate(validators.analysis.full), (req, res) => {
 	
 	//Hardcoded files
 	data.config.input_file = 'LP6008242-DNA_A01.genome.vcf.gz'
-	data.config.output_file = 'LP6008242-DNA_A01.genome.output.vcf.gz'
+	data.config.output_file = 'output.vcf'
+	data.config.output_annotated_file = 'output.vcf.hg19_multianno.vcf'
+
 
 	axios.post(data_server_endpoint+'/api/analysis', data)
 	  .then(function (response) {

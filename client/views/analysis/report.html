@@ -1,5 +1,4 @@
-<%- include('../layout/header.html'); %>
-
+<%- include('../layout/header.html', {'tab': 'analyses'}); %>
 
 <% if(analysis.failed) { %>
     <div class="alert alert-danger text-center" role="alert">
@@ -11,14 +10,68 @@
 
 <%- include('../inc/stages.html', {'stages': analysis.progress.stages}); %>
 
+<br>
 
-<%- JSON.stringify(analysis) %>
+<a data-toggle="collapse" href="#collapse-config" aria-expanded="false" aria-controls="collapse-config">
+	Configuration <small>(Show/Hide)</small>
+</a>
 
+<div class="collapse show" id="collapse-config">
+  <div class="card card-body">
+		<p>
+			<strong>Author: </strong>
+			<%= analysis.author %>
+		</p>
+		<p>
+			<strong>Title: </strong>
+			<%= analysis.title %>
+		</p>
+		<p>
+			<strong>Description: </strong>
+			<%= analysis.description %>
+		</p>
+		<p>
+			<strong>Date: </strong>
+			<%= moment(analysis.createdAt).format('DD/MM/YYYY HH:mm') %>
+		</p>
+		<p>
+			<strong>Processing Time: </strong>
+			<%= moment(analysis.createdAt).to(analysis.finishedAt)  %>
+		</p>
+
+		<hr>
+
+		<dl class="row">
+		  <dt class="col-sm-2">Min Quality</dt>
+		  <dd class="col-sm-4"><%= analysis.config['min-quality'] %></dd>
+
+		  <dt class="col-sm-2">Site Types</dt>
+		  <dd class="col-sm-4"><%= analysis.config['site-types'] %></dd>
+
+		  <dt class="col-sm-2">Min DP</dt>
+		  <dd class="col-sm-4"><%= analysis.config['min-dp'] %></dd>
+
+		  <dt class="col-sm-2">Max DP</dt>
+		  <dd class="col-sm-4"><%= analysis.config['max-dp'] %></dd>
+		  
+		  <dt class="col-sm-2">Min MAF</dt>
+		  <dd class="col-sm-4"><%= analysis.config['min-maf'] %></dd>
+
+		  <dt class="col-sm-2">Max MAF</dt>
+		  <dd class="col-sm-4"><%= analysis.config['max-maf'] %></dd>
+
+		  <dt class="col-sm-2">Only passing sites</dt>
+		  <dd class="col-sm-4"><%= analysis.config['remove-non-passing-sites'] %></dd>
+		</dl>
+  </div>
+</div>
+
+<hr>
 
 <div class="row">
   <div class="col-lg-8 offset-lg-2">
     <div class="input-group input-group-lg">
-      <input type="text" class="form-control" id="searchfield-sites" placeholder="Search for..." aria-label="Search for..." value="QUAL=63, REF=T, ALT=G">
+      <input type="text" class="form-control" id="searchfield-sites" placeholder="Search for..." aria-label="Search for..." value="GENE=RXRA, REF=T">
       <span class="input-group-btn">
         <button class="btn btn-primary" id="search-sites" type="button">Search</button>
       </span>
@@ -30,60 +83,27 @@
 	<!-- Loaded via AJAX -->
 </div>
 
-
-<!-- <div class="card">
-  <div class="card-header">
-    Analysis
-  </div>
-  <div class="card-body">
-    <h4 class="card-title">Configuration</h4>
-    
-    <div class="row">
-	    <div class="col-md-5">
-	    	<form>
-	    	  
-	    	  <div class="form-group row">
-	    	    <label for="" class="col-sm-4 col-form-label">Min. Mean DP</label>
-	    	    <div class="col-sm-6">
-	    	      <input type="text" readonly class="form-control-plaintext" value="1">
-	    	    </div>
-	    	  </div>
-	    	  <div class="form-group row">
-	    	    <label for="" class="col-sm-4 col-form-label">Max. Mean DP</label>
-	    	    <div class="col-sm-6">
-	    	    	<input type="text" readonly class="form-control-plaintext" value="1">
-	    	    </div>
-	    	  </div>
-	    	  <div class="form-group row">
-	    	    <label for="" class="col-sm-4 col-form-label">
-	    	    	<span class="icon ion-android-checkbox-outline"></span>
-	    	    </label>
-	    	    <div class="col-sm-6">
-	    	      Removes all sites with a FILTER flag other than PASS
-	    	    </div>
-	    	  </div>
-	    	  
-	    	</form>
-	    </div>
-
-	    <div class="offset-md-1 col-md-5">
-	    	<form>
-	    	  
-	    	  <div class="form-group row">
-	    	    <label for="" class="col-sm-3 col-form-label">Email</label>
-	    	    <div class="col-sm-7">
-	    	      <input type="text" readonly class="form-control-plaintext" value="1">
-	    	    </div>
-	    	  </div>
-
-	    	</form>
-	    </div>
+<!-- Modal Site Detail -->
+<div class="modal fade" id="modal-site-detail" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="">
+        	Detail INFO
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        
+      </div>
     </div>
-
   </div>
 </div>
- -->
-
 
 
 <%- include('../inc/go-back.html', {'url': '/analysis'}); %>

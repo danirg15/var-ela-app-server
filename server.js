@@ -25,6 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(session({ secret: process.env.APP_KEY, resave: false, saveUninitialized: false }));
 app.use(flash())
+app.locals.moment = require('moment')
 
 //--------------------------------------------
 //		Configuration
@@ -57,7 +58,9 @@ app.engine('html', ejs.renderFile)
 app.get('/', (req, res) => {
 	res.redirect('/analysis')
 }) 
-
+app.get('/about', (req, res) => {
+	res.render('shared/about')
+}) 
 
 app.use('/analysis', require('./routes/analysis.routes'))
 app.use('/sites', require('./routes/sites.routes'))

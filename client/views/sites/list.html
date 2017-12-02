@@ -3,27 +3,24 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">CHROM</th>
-      <th scope="col">POS</th>
-      <th scope="col">ID</th>
-      <th scope="col">REF</th>
-      <th scope="col">ALT</th>
-      <th scope="col">QUAL</th>
-      <th scope="col">GENE</th>
-      <th scope="col">FILTER</th>
-      <!-- <th scope="col">Clinvar</th>
-      <th scope="col">Cosmic</th> -->
-      <!-- <th scope="col">INFO</th>
-      <th scope="col">FORMAT</th> -->
+      <th class="th-center" scope="col">CHROM</th>
+      <th class="th-center" scope="col">POS</th>
+      <th class="th-center" scope="col">ID</th>
+      <th class="th-center" scope="col">REF</th>
+      <th class="th-center" scope="col">ALT</th>
+      <th class="th-center" scope="col">QUAL</th>
+      <th class="th-center" scope="col">GENE</th>
+      <th class="th-center" scope="col">FILTER</th>     
+      <th class="th-center" scope="col">FORMAT</th>
+      <th class="th-center" scope="col"></th>
     </tr>
   </thead>
   <tbody>
-
     <% sites.forEach(function(site) { %>  
       <tr>
-        <td><%= site.CHROM %></td>
-        <td><%= site.POS %></td>
-        <td>
+        <td class="td-center"><%= site.CHROM %></td>
+        <td class="td-center"><%= site.POS %></td>
+        <td class="td-center">
           <% site.ID.forEach(function(id) { %>  
               <% if(id != '.') { %>
                 <a target="_blank" href="https://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=<%= id %>">
@@ -33,39 +30,35 @@
               <% } %>
           <% }) %> 
         </td>
-        <td><%= site.REF %></td>
-        <td><%= site.ALT %></td>
-        <td><%= site.QUAL %></td>
-        <td>
+        <td class="td-center"><%= site.REF %></td>
+        <td class="td-center"><%= site.ALT %></td>
+        <td class="td-center"><%= site.QUAL %></td>
+        <td class="td-center">
           <% site.GENE.forEach(function(gene) { %>  
             <a target="_blank" href="http://www.genecards.org/cgi-bin/carddisp.pl?gene=<%= gene %>">
               <%= gene %>
             </a>
             <br>
           <% }) %> 
-          
         </td>
-        <td><%= site.FILTER %></td>
-        <td><%= site.clinical_annotation.clinvar %></td>          
-        <td><%= site.clinical_annotation.cosmic %></td>          
-        <td>
-          <!-- <% site.INFO.forEach(function(info) { %>  
-            <% if(info.split('=')[1] != '.') { %>
-              <%= info %><br>
-            <% } %>
-          <% }) %>       -->      
-        </td>
-        <td>
+        <td class="td-center"><%= site.FILTER %></td>       
+        <td class="td-center">
           <%= site.FORMAT %><br>
           <%= site.DATA %>
         </td>
-        <td>
-          <a href="/sites/detail/<%= site._id %>">
-            Detail
-          </a>
+        <td class="td-center">
+          <button class="show-site-detail btn btn-sm btn-info" data-site-id="<%= site._id %>">
+            <span class="icon ion-ios-search-strong"></span>
+          </button>
         </td>
       </tr>
     <% }) %>
   </tbody>
 </table>
+
+<% if(sites.length == 0) { %>
+    <p class="text-center text-muted h4">
+      No Results!
+    </p>
+<% } %>
 

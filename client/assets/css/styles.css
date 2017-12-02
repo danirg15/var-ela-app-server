@@ -1,7 +1,6 @@
-th, td {
+.th-center, .td-center {
   text-align: center;
 }
-
 
 .form-title {
   margin-top: 3rem;
@@ -54,18 +53,4 @@ footer p {
   margin-bottom: .25rem;
   color: #d4d4d4;
 }
-/*
-.card {
-  float: left;
-  width: 33.333%;
-  padding: .75rem;
-  margin-bottom: 2rem;
-}
 
-.card > img {
-  margin-bottom: .75rem;
-}
-
-.card-text {
-  font-size: 85%;
-}*/

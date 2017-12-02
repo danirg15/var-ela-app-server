@@ -1,10 +1,7 @@
-<%- include('../layout/header.html'); %>
+<%- include('../layout/header.html', {'tab': 'analyses'}); %>
 
 
-<h1 class="head-title">Analysis List</h1>
-
-
-
+<h1 class="head-title">Analyses</h1>
 
 <a href="/analysis/create" class="btn btn-success float-right">
 	<span class="icon ion-ios-plus-outline"></span> New
@@ -15,23 +12,25 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Author</th>
-      <th scope="col">Date</th>
-      <th scope="col">Progress</th>
-      <th scope="col">Action</th>
+      <th class="th-center" scope="col">#</th>
+      <th class="th-center" scope="col">Name</th>
+      <th class="th-center" scope="col">Author</th>
+      <th class="th-center" scope="col">Date</th>
+      <th class="th-center" scope="col">Progress</th>
+      <th class="th-center" scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
     <% analyses.forEach(function(analysis) { %>  
       <tr>
         <th scope="row"></th>
-        <td><%= analysis.title %></td>
-        <td><%= analysis.author %></td>
-        <td><%= analysis.createdAt %></td>
-        <td><%= analysis.progress.percent %> %</td>
-        <td>
+        <td class="td-center"><%= analysis.title %></td>
+        <td class="td-center"><%= analysis.author %></td>
+        <td class="td-center">
+          <%= moment(analysis.createdAt).format('DD/MM/YYYY HH:mm') %>
+        </td>
+        <td class="td-center"><%= analysis.progress.percent %> %</td>
+        <td class="td-center">
         	<a href="/analysis/<%= analysis._id %>/report" class="btn btn-primary">
         		<span class="icon ion-stats-bars"></span>
         	</a>
