@@ -1,3 +1,7 @@
+.file-item {
+  padding: 2rem;
+}
+
 .th-center, .td-center {
   text-align: center;
 }

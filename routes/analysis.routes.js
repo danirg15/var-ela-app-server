@@ -30,6 +30,21 @@ router.get('/:id/report', (req, res) => {
 
 })
 
+router.get('/select-files', (req, res) => {
+	axios.get(data_server_endpoint+'/api/fs/explore', {'params': req.query})
+	  .then(function (response) {
+	  	res.render('analysis/select-files', {
+	  		'listing': response.data,
+	  		'query': req.query
+	  	})
+	  })
+	  .catch(function (error) {
+	  	req.flash('status', 'error')
+	  	req.flash('info', 'Cannot retrieve files from data server. Check out connection.')
+	    res.render('analysis/select-files', {'listing': []})
+	  });
+})
+
 router.get('/create', (req, res) => {
 	res.render('analysis/form')
 })
