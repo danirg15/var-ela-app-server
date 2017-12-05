@@ -20,7 +20,10 @@ router.get('/:id/report', (req, res) => {
 
 	axios.get(data_server_endpoint+'/api/analysis/'+req.params.id)
 	  .then(function (response) {
-	    res.render('analysis/report', {'analysis': response.data})
+	    res.render('analysis/report', {
+	    	'analysis': response.data,
+	    	'data_server_endpoint': data_server_endpoint
+	    })
 	  })
 	  .catch(function (error) {
 	  	req.flash('status', 'error')

@@ -37,12 +37,18 @@
 		<p>
 			<strong>Processing Time: </strong>
 			<% if(analysis.finishedAt != null) { %>
-				<%= moment(analysis.createdAt).to(analysis.finishedAt) %>
+				<%= moment(analysis.runnedAt).to(analysis.finishedAt) %>
 			<% } %>
 		</p>
 		<p>
 			<strong>Total sites: </strong>
 			<%= analysis.result_sites_count %>
+		</p>
+		<p>
+			<strong>Download result VCF: </strong>
+			<a href="<%= data_server_endpoint %>/api/analysis/<%= analysis._id %>/download">
+				<i class="icon ion-ios-cloud-download"></i>
+			</a>
 		</p>
 
 		<hr>

@@ -14,7 +14,11 @@
             <% if(info.split('=')[1] != '.') { %>
               <tr>
                 <td><%= info.split('=')[0] %></td>  
-                <td><%= info.split('=')[1] %></td>        
+                <td>
+                  <p class="text-justify">
+                    <%= info.split('=')[1] %>
+                  </p>
+                </td>        
               </tr> 
             <% } %>
 

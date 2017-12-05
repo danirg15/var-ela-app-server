@@ -7,14 +7,15 @@
   <div class="form-group row">
     <label for="title" class="col-sm-2 col-form-label">Title</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="title" placeholder="" required>
+      <input type="text" class="form-control" name="title" placeholder="" value="Lorem ipsum" required>
     </div>
   </div>
 
   <div class="form-group row">
     <label for="description" class="col-sm-2 col-form-label">Description</label>
     <div class="col-sm-10">
-      <textarea class="form-control" name="description" rows="5"></textarea>
+      <textarea class="form-control" name="description" rows="5">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+      </textarea>
     </div>
   </div>
   
@@ -29,6 +30,10 @@
     </label>
     <div class="col-sm-10">
       <select class="form-control" name="min-dp">
+        
+        <!-- remove -->
+        <option value="3" selected>3</option>
+
         <option value=""></option>
         <% for(let i = 3; i <= 10; i++){ %>
           <option value="<%= i %>"><%= i %></option>
@@ -45,6 +50,10 @@
     </label>
     <div class="col-sm-10">
       <select class="form-control" name="max-dp">
+
+        <!-- remove -->
+        <option value="7">7</option>
+
         <option value=""></option>
         <% for(let i = 3; i <= 10; i++){ %>
           <option value="<%= i %>"><%= i %></option>
@@ -59,7 +68,10 @@
     <div class="col-sm-10">
       <div class="form-check">
         <label class="form-check-label">
-          <input class="form-check-input" name="remove-non-passing-sites" type="checkbox"> Removes all sites with a FILTER flag other than PASS
+          
+          <!-- uncheck later -->
+          <input class="form-check-input" name="remove-non-passing-sites" type="checkbox" checked="true"> Removes all sites with a FILTER flag other than PASS
+
         </label>
       </div>
     </div>
@@ -68,7 +80,7 @@
   <h5 class="form-title">Variant Type Filtering</h5>
   <hr>
   <small class="form-text text-muted">
-    *Inlcludes all variants by default
+    *Includes all variants by default if none selected.
   </small>
   <br>
   <div class="form-group row">
@@ -76,7 +88,9 @@
     <div class="col-sm-1">
       <div class="form-check">
         <label class="form-check-label">
-          <input class="form-check-input" name="site-types" value="snp" type="checkbox"> SNP
+
+          <!-- uncheck later -->
+          <input class="form-check-input" name="site-types" value="snp" type="checkbox" checked="true"> SNP
         </label>
       </div>
     </div>
@@ -143,6 +157,10 @@
     </label>
     <div class="col-sm-10">
       <select class="form-control" name="min-quality">
+
+        <!-- remove later -->
+        <option value="50" selected>50</option>
+
         <option></option>
         <% for(let i = 10; i <= 300; i+=10){ %>
           <option value="<%= i %>"><%= i %></option>
