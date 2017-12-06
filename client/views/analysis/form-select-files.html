@@ -23,7 +23,7 @@
 
 <br><br>
 
-<form action="/analysis/<%= analysis_id %>/select-files" method="POST">
+<form action="/analysis/<%= analysis_id %>/select-files" method="POST" id="form-select-files">
   <% listing.forEach(function(file) { %>
     <span class="file-item">
       <input type="checkbox" class="form-check-input" name="files" value="<%= file %>">

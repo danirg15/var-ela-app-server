@@ -3,8 +3,6 @@ $(function () {
 })
 
 
-
-
 $("#test-connection").click(function() {
     var host = $('#host').val()
     var port = $('#port').val()
@@ -58,14 +56,19 @@ $('#search-sites').click(function() {
 
 $('#search-sites-results').on('click', '.show-site-detail', function() {
     var $modal_elem = $('#modal-site-detail')
-      
     $.get('/sites/detail/' + $(this).data('site-id'), function(res) {
       $modal_elem.find('.modal-body').html(res)
       $modal_elem.modal('show')
     })
-
-  
 })
 
+$('#form-select-files').submit(function(e) {
 
+  if($("[name=files]:checked").length == 0) {
+    alert('Select at least one file!')
+    return false
+  }
+  
+  return true
+})
 
