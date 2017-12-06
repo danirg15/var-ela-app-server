@@ -34,7 +34,7 @@
         	<a href="/analysis/<%= analysis._id %>/report" class="btn btn-primary">
         		<span class="icon ion-stats-bars"></span>
         	</a>
-          <% if(analysis.config.input_file.length == 0) { %>
+          <% if(analysis.config.input_files.length == 0) { %>
             <a href="/analysis/<%= analysis._id %>/select-files" class="btn btn-warning">
               <span class="icon ion-document-text"></span>
             </a>

@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
 
+      <h5>INFO Annotations</h5>
       <table class="table">
         <thead>
           <tr>
@@ -25,6 +26,29 @@
           <% }) %> 
         </tbody>
       </table>   
+
+      <br><br>
+
+      <h5>Samples</h5>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Data</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <% site.SAMPLE_DATA.forEach(function(data) { %>              
+              <tr>
+                <td><%= data.split(';')[1] %></td>  
+                <td><%= data.split(';')[0] %></td>       
+              </tr> 
+          <% }) %> 
+
+        </tbody>
+      </table> 
+      
 
   </div>
 </div>

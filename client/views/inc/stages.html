@@ -2,27 +2,32 @@
   <li class="<%= stages.submit ? 'is-complete' : '' %>" data-step="1">
     Submit
   </li>
+  <li class="<%= stages.merge ? 'is-complete' : '' %> 
+             <%= stages.submit && !stages.merge ? 'is-active' : '' %>" 
+             data-step="2">
+    Merge files
+  </li>
   <li class="<%= stages.filtering ? 'is-complete' : '' %> 
              <%= stages.submit && !stages.filtering ? 'is-active' : '' %>" 
-             data-step="2">
+             data-step="3">
     Filtering
   </li>
   <li class="<%= stages.annotating ? 'is-complete' : '' %> 
              <%= stages.filtering && !stages.annotating ? 'is-active' : '' %>" 
-             data-step="3">
+             data-step="4">
     Annotating
   </li>
   <li class="<%= stages.stats ? 'is-complete' : '' %> 
              <%= stages.annotating && !stages.stats ? 'is-active' : '' %>" 
-             data-step="4">
+             data-step="5">
     Stats
   </li>
   <li class="<%= stages.import ? 'is-complete' : '' %> 
              <%= stages.stats && !stages.import ? 'is-active' : '' %>" 
-             data-step="5">
+             data-step="6">
     Import
   </li>
-  <li data-step="6" class="progress-steps__last
+  <li data-step="7" class="progress-steps__last
                            <%= stages.completed ? 'is-complete' : '' %> 
                            <%= stages.import && !stages.completed ? 'is-active' : '' %>">
     Completed
