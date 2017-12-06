@@ -13,5 +13,10 @@ module.exports = {
 		    'min-maf': 			Joi.number().precision(8).optional().allow(''),	
 		    'max-maf': 			Joi.number().precision(8).optional().allow(''),	
 		  }
+	},
+	select_files: {
+		  body: {
+		    'files': 	Joi.array().items(Joi.string()).required().single()
+		  }
 	}
 }

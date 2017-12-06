@@ -33,12 +33,43 @@ router.get('/:id/report', (req, res) => {
 
 })
 
-router.get('/select-files', (req, res) => {
+
+router.get('/create', (req, res) => {
+	res.render('analysis/form-analysis-config')
+})
+
+router.post('/create', validate(validators.analysis.full), (req, res) => {
+	let data = {
+		'title': req.body.title,
+		'description': req.body.description,
+		'author': 'Daniel Ramirez',
+		'config': req.body
+	}
+
+	console.log(data)
+
+	axios.post(data_server_endpoint+'/api/analysis', data)
+	  .then(function (response) {
+	  	req.flash('status', 'success')
+	  	req.flash('info', 'Analysis configuration saved successfully')
+	    res.redirect('/analysis/'+ response.data.obj._id +'/select-files')
+	  })
+	  .catch(function (error) {
+	  	req.flash('status', 'error')
+	  	req.flash('info', 'Something went wrong while creating the new analysis. ' + error)
+	    res.redirect('/')
+	  });
+})
+
+
+
+router.get('/:id/select-files', (req, res) => {
 	axios.get(data_server_endpoint+'/api/fs/explore', {'params': req.query})
 	  .then(function (response) {
-	  	res.render('analysis/select-files', {
+	  	res.render('analysis/form-select-files', {
 	  		'listing': response.data,
-	  		'query': req.query
+	  		'query': req.query,
+	  		'analysis_id': req.params.id
 	  	})
 	  })
 	  .catch(function (error) {
@@ -48,34 +79,17 @@ router.get('/select-files', (req, res) => {
 	  });
 })
 
-router.get('/create', (req, res) => {
-	res.render('analysis/form')
-})
 
-router.post('/create', validate(validators.analysis.full), (req, res) => {
-
-	let data = {
-		'title': req.body.title,
-		'description': req.body.description,
-		'author': 'Daniel Ramirez',
-		'config': req.body
-	}
-
-	//Hardcoded files
-	data.config.input_file = 'LP6008242-DNA_A01.genome.vcf.gz'
-	data.config.output_file = 'output.vcf'
-	data.config.output_annotated_file = 'output.vcf.hg19_multianno.vcf'
-
-
-	axios.post(data_server_endpoint+'/api/analysis', data)
+router.post('/:id/select-files', validate(validators.analysis.select_files), (req, res) => {
+	axios.post(data_server_endpoint+'/api/analysis/'+req.params.id+'/input-files', req.body)
 	  .then(function (response) {
 	  	req.flash('status', 'success')
-	  	req.flash('info', 'Analysis submitted successfully')
+	  	req.flash('info', 'Analysis saved successfully and queued.')
 	    res.redirect('/')
 	  })
 	  .catch(function (error) {
 	  	req.flash('status', 'error')
-	  	req.flash('info', 'Something went wrong while creating the new analysis. ' + error)
+	  	req.flash('info', 'Something went wrong while submitting the files. ' + error)
 	    res.redirect('/')
 	  });
 })

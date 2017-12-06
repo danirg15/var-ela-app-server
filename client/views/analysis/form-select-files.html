@@ -1,7 +1,7 @@
 <%- include('../layout/header.html', {'tab': 'analyses'}); %>
 
 
-<h1 class="head-title">Select Files</h1>
+<h1 class="head-title">Step 2: Select Files</h1>
 <small id="passwordHelpBlock" class="form-text text-muted">
   *Note: Only .vcf.gz files are listed.
 </small>
@@ -23,13 +23,26 @@
 
 <br><br>
 
-<% listing.forEach(function(file) { %>
-  <span class="file-item">
-    <input type="checkbox" class="form-check-input" name="files[]" value="<%= file %>">
-    <%= file %> 
-  </span>
+<form action="/analysis/<%= analysis_id %>/select-files" method="POST">
+  <% listing.forEach(function(file) { %>
+    <span class="file-item">
+      <input type="checkbox" class="form-check-input" name="files" value="<%= file %>">
+      <%= file %> 
+    </span>
+    <br>
+  <% }) %>
+
   <br>
-<% }) %>
+  <br>
+  <div class="form-group row">
+    <div class="offset-md-4 col-sm-3">
+      <button type="submit" class="btn btn-success btn-block">
+        Save and Run now
+        <span class="icon ion-paper-airplane"></span>
+      </button>
+    </div>
+  </div>
+</form>
 
 
 <%- include('../layout/footer.html'); %>

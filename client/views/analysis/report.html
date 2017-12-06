@@ -44,11 +44,22 @@
 			<strong>Total sites: </strong>
 			<%= analysis.result_sites_count %>
 		</p>
+		<% if(analysis.finishedAt != null) { %>
 		<p>
 			<strong>Download result VCF: </strong>
 			<a href="<%= data_server_endpoint %>/api/analysis/<%= analysis._id %>/download">
 				<i class="icon ion-ios-cloud-download"></i>
 			</a>
+		</p>
+		<% } %>
+		<p>
+			<strong>Input files: </strong>
+			<br>
+			<ul>
+				<% analysis.config.input_file.forEach(function(file) { %>
+					<li><%= file %></li>
+				<% }) %>
+			</ul>
 		</p>
 
 		<hr>
