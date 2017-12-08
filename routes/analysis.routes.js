@@ -46,8 +46,6 @@ router.post('/create', validate(validators.analysis.full), (req, res) => {
 		'config': req.body
 	}
 
-	console.log(data)
-
 	axios.post(data_server_endpoint+'/api/analysis', data)
 	  .then(function (response) {
 	  	req.flash('status', 'success')
@@ -75,7 +73,7 @@ router.get('/:id/select-files', (req, res) => {
 	  .catch(function (error) {
 	  	req.flash('status', 'error')
 	  	req.flash('info', 'Cannot retrieve files from data server. Check out connection.')
-	    res.render('analysis/select-files', {'listing': []})
+	    res.redirect('/')
 	  });
 })
 
