@@ -82,7 +82,7 @@ router.post('/:id/select-files', validate(validators.analysis.select_files), (re
 	axios.post(data_server_endpoint+'/api/analysis/'+req.params.id+'/input-files', req.body)
 	  .then(function (response) {
 	  	req.flash('status', 'success')
-	  	req.flash('info', 'Analysis saved successfully and queued.')
+	  	req.flash('info', 'Analysis saved successfully.')
 	    res.redirect('/')
 	  })
 	  .catch(function (error) {
@@ -92,5 +92,34 @@ router.post('/:id/select-files', validate(validators.analysis.select_files), (re
 	  });
 })
 
+
+router.get('/:id/remove', (req, res) => {
+	axios.delete(data_server_endpoint+'/api/analysis/'+req.params.id)
+	  .then(function (response) {
+	  	req.flash('status', 'success')
+	  	req.flash('info', 'Analysis removed.')
+	  	res.redirect('/')
+	  })
+	  .catch(function (error) {
+	  	req.flash('status', 'error')
+	  	req.flash('info', 'Cannot remove. Check out connection.')
+	    res.redirect('/')
+	  });
+})
+
+
+router.get('/:id/run', (req, res) => {
+	axios.post(data_server_endpoint+'/api/analysis/'+req.params.id+'/run')
+	  .then(function (response) {
+	  	req.flash('status', 'success')
+	  	req.flash('info', 'Analysis queued.')
+	  	res.redirect('/')
+	  })
+	  .catch(function (error) {
+	  	req.flash('status', 'error')
+	  	req.flash('info', 'Cannot run analysis. Check out connection.')
+	    res.redirect('/')
+	  });
+})
 
 module.exports = router;

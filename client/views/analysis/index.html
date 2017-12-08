@@ -34,9 +34,20 @@
         	<a href="/analysis/<%= analysis._id %>/report" class="btn btn-primary">
         		<span class="icon ion-stats-bars"></span>
         	</a>
+
+          <a href="/analysis/<%= analysis._id %>/remove" class="btn btn-danger">
+            <span class="icon ion-ios-trash"></span>
+          </a>
+          
           <% if(analysis.config.input_files.length == 0) { %>
             <a href="/analysis/<%= analysis._id %>/select-files" class="btn btn-warning">
               <span class="icon ion-document-text"></span>
+            </a>
+          <% } %>
+
+          <% if(analysis.runnedAt == null && analysis.config.input_files.length > 0) { %>
+            <a href="/analysis/<%= analysis._id %>/run" class="btn btn-success">
+              <span class="icon ion-jet"></span> Run
             </a>
           <% } %>
         </td>
