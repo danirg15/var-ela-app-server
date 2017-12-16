@@ -46,20 +46,42 @@
 		</p>
 		<% if(analysis.finishedAt != null) { %>
 		<p>
-			<strong>Download result VCF: </strong>
-			<a href="<%= data_server_endpoint %>/api/analysis/<%= analysis._id %>/download">
-				<i class="icon ion-ios-cloud-download"></i>
-			</a>
+			<strong>Download results: </strong>
+			<ul>
+				<li>
+					.vcf
+					<a href="<%= data_server_endpoint %>/api/analysis/<%= analysis._id %>/download/vcf">
+						<i class="icon ion-ios-cloud-download"></i>
+					</a>
+				</li>
+				<li>
+					.csv
+					<a href="<%= data_server_endpoint %>/api/analysis/<%= analysis._id %>/download/csv">
+						<i class="icon ion-ios-cloud-download"></i>
+					</a>
+				</li>
+			</ul>
+			
+			
 		</p>
 		<% } %>
 		<p>
-			<strong>Input files: </strong>
-			<br>
-			<ul>
-				<% analysis.config.input_files.forEach(function(file) { %>
-					<li><%= file %></li>
-				<% }) %>
-			</ul>
+			<strong data-toggle="collapse" data-target="#collapse-files" aria-expanded="false">
+				Input files
+				<span class="ion-chevron-down"></span>
+			</strong>
+
+			<div class="collapse" id="collapse-files">
+			  <div class="card card-body">
+			    <ul>
+			    	<% analysis.config.input_files.forEach(function(file) { %>
+			    		<li><%= file %></li>
+			    	<% }) %>
+			    </ul>
+			  </div>
+			</div>
+
+			
 		</p>
 
 		<hr>

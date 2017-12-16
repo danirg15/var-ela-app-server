@@ -62,6 +62,8 @@ $('#search-sites-results').on('click', '.show-site-detail', function() {
     })
 })
 
+
+
 $('#form-select-files').submit(function(e) {
 
   if($("[name=files]:checked").length == 0) {
@@ -72,3 +74,25 @@ $('#form-select-files').submit(function(e) {
   return true
 })
 
+$('#form-analysis-config').submit(function(e) {
+  var title = $("[name=title]").val();
+  var min_maf = $("[name=min-maf]").val();
+  var max_maf = $("[name=max-maf]").val();
+
+  if(title == '') {
+    alert('Title is mandatory')
+    return false
+  }
+
+  if(min_maf != '' && !$.isNumeric(min_maf)) {
+    alert('Min MAF must be numeric')
+    return false
+  }
+
+  if(max_maf != '' && !$.isNumeric(max_maf)) {
+    alert('Max MAF must be numeric')
+    return false
+  }
+
+  return true
+})
