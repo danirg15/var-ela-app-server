@@ -33,9 +33,30 @@ $('#search-sites').click(function() {
     var query = {}
     if (params) {
         $.each(params.split(','), function(i, param) {
-            var field = param.split('=')[0].trim()
-            var value = param.split('=')[1].trim()
-            query[field] = value
+
+            if (param.indexOf('=') == -1 &&
+                param.indexOf('>') == -1 &&
+                param.indexOf('<') == -1) {
+
+              alert('Invalid operator!. Use: = | < | >')
+              return
+            }
+
+            var operator = null;
+
+            if (param.indexOf('=') != -1) {
+                operator = '='
+            }
+            else if (param.indexOf('<') != -1) {
+                operator = '<'
+            }
+            else if (param.indexOf('>') != -1) {
+                operator = '>'
+            }
+
+            var field = param.split(operator)[0].trim()
+            var value = param.split(operator)[1].trim()
+            query[field.toUpperCase()] = value
         })
     }
         
