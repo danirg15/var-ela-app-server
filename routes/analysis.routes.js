@@ -79,7 +79,7 @@ router.get('/:id/select-files', (req, res) => {
 
 
 router.post('/:id/select-files', validate(validators.analysis.select_files), (req, res) => {
-	axios.post(data_server_endpoint+'/api/analysis/'+req.params.id+'/input-files', req.body)
+	axios.put(data_server_endpoint+'/api/analysis/'+req.params.id+'/input-files', req.body)
 	  .then(function (response) {
 	  	req.flash('status', 'success')
 	  	req.flash('info', 'Analysis saved successfully.')

@@ -11,7 +11,7 @@ This applications just use the API exposed by XXXXX_data_server to send jobs and
 To be able to connect to a remote machine, there must be installed the XXX_data_server module in the remote compute-machine. Then providing the remote host, port where is running XXX_data_server, and API Key issued by XXXX_data_server you can administrate all the analyses hosted in the compute-machine we are connected to.
 
 # Use
-The application runs inside a Docker containaer. To deploy this app just run the following commands.
+The application runs inside a Docker containaer, so to deploy this app just run the following commands.
 
 #### Install docker
 ```sh
@@ -29,3 +29,6 @@ $ cd XXXXX
 $ sudo docker-compose up
 ```
 The app will run in port 3000 by default, this can be changed in .env
+
+# License
+The MIT License (MIT)
