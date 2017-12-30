@@ -13,8 +13,10 @@
   "dependencies": {
     "async": "^1.5.2",
     "axios": "^0.16.0",
+    "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.14.2",
     "config": "^1.21.0",
+    "cookie-parser": "^1.4.3",
     "dotenv": "^2.0.0",
     "ejs": "^2.5.7",
     "express": "^4.13.4",
@@ -30,7 +32,8 @@
     "moment-timezone": "^0.5.11",
     "mongoose": "^4.3.7",
     "nodemon": "^1.12.1",
-    "password-hash": "^1.2.2"
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

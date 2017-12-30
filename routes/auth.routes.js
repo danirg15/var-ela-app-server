@@ -1,30 +1,29 @@
 const router 			= require('express').Router()
-const AuthController 	= require('../controllers/AuthController')
-const validate 			= require('express-validation');
-const validators 		= require('./validators');
+const passport 			= require('passport')
+require('../config/passport_local')(passport)
 
-router.post('/auth/login', validate(validators.auth.full), (req, res) => {
-	AuthController.login(req.body.username, req.body.password, (err, token) => {
-		if (token && !err) {
-			res.status(200).json({ 
-				'message': 'Successful login',
-				'token': token 
-			})
-		}
-		else{
-			res.status(401).json({ 
-				'message': 'Auth failed'
-			})
-		}
-	})
+
+router.get('/login', (req, res) => {
+	res.render('auth/login.html')
 })
 
+router.post('/login', passport.authenticate('local-login', {
+    successRedirect : '/', // redirect to the secure profile section
+    failureRedirect : '/login', // redirect back to the signup page if there is an error
+    failureFlash : true // allow flash messages
+}))
 
-router.get('/auth/refresh_token', (req, res) => {
-      
+router.get('/signup', (req, res) => {
+	res.render('auth/signup.html')
 })
 
-router.get('/auth/logout', (req, res) => {
+router.post('/signup', passport.authenticate('local-signup', {
+    successRedirect : '/', // redirect to the secure profile section
+    failureRedirect : '/signup', // redirect back to the signup page if there is an error
+    failureFlash : true // allow flash messages
+}));
+
+router.get('/logout', (req, res) => {
       
 })
 
