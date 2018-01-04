@@ -11,7 +11,6 @@ const env = 			require('dotenv').config()
 const path = 			require('path')
 const logger = 			require('morgan')
 const config = 			require('config')
-// const auth = 			require('./middleware/jwtAuth')
 const moment_tz = 		require('moment-timezone')
 const helmet = 			require('helmet')
 const ejs =				require('ejs')
@@ -24,6 +23,7 @@ const passport = 		require('passport')
 //--------------------------------------------
 app.use(helmet())
 app.use(cookieParser())
+app.use(logger('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(session({ secret: process.env.APP_KEY, resave: false, saveUninitialized: false }));
@@ -32,16 +32,16 @@ app.use(passport.session())
 app.use(flash())
 app.locals.moment = require('moment')
 
+//Auth middlewares
+const isLoggedIn = require('./middleware/isLoggedIn')
+const isAdmin = require('./middleware/isAdmin')
+
 //--------------------------------------------
 //		Configuration
 //--------------------------------------------
 const port = process.env.PORT || 3000
 
 moment_tz.tz.setDefault(process.env.APP_TIME_ZONE || 'Europe/Madrid');
-
-if(config.util.getEnv('NODE_ENV') !== 'test') {
-    app.use(logger('dev'))
-}
 
 
 //Serve html
@@ -56,34 +56,27 @@ app.engine('html', ejs.renderFile)
 require('./database').connect(config.DB_URI)
 
 
-
 //--------------------------------------------
 //		Routing
 //--------------------------------------------
 
+//Public routes
 app.use(require('./routes/auth.routes'))
 
-//Auth middleware
-app.use(require('./middleware/isLoggedIn'))
+//Admin routes
+app.use('/admin', [isLoggedIn, isAdmin], require('./routes/admin.routes')) 
 
-
-//-------------------------
-//		Private routes
-//-------------------------
-app.get('/', (req, res) => {
-	res.redirect('/analysis')
-}) 
-app.get('/about', (req, res) => {
-	res.render('shared/about')
-}) 
-app.use('/analysis', require('./routes/analysis.routes'))
-app.use('/sites', require('./routes/sites.routes'))
-app.use('/data-server-connection', require('./routes/data_server_connection.routes'))
-
+//Private routes
+app.get('/', isLoggedIn, (req, res) => res.redirect('/analysis')) 
+app.use('/analysis', isLoggedIn, require('./routes/analysis.routes'))
+app.use('/sites', isLoggedIn, require('./routes/sites.routes'))
+app.use('/data-server-connection', isLoggedIn, require('./routes/data_server_connection.routes'))
 
 //--------------------------------------------
-//		Jobs scheduling
+//		Setup
 //--------------------------------------------
+const UserController = require('./controllers/UserController')
+UserController.createAdminUser((err) => { console.log(err) })
 
 
 //--------------------------------------------
@@ -91,13 +84,9 @@ app.use('/data-server-connection', require('./routes/data_server_connection.rout
 //--------------------------------------------
 const server = http.createServer(app)
 
-
 server.listen(port, function(err) {
 	if (err) throw err
 	console.log('APP Server running on port: ' + port)
 })
-
-
-
 
 

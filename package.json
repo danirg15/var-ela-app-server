@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "run": "forever start server.js",
-    "start": "export NODE_ENV=dev && nodemon server",
-    "test": "export NODE_ENV=test && mocha --recursive --timeout 10000"
+    "start": "nodemon server",
   },
   "author": "dani",
   "license": "ISC",

@@ -1,0 +1,46 @@
+<%- include('../layout/header.html', {'tab': 'admin'}); %>
+
+<h1 class="head-title">Users</h1>
+
+<a href="/admin/users/create" class="btn btn-success float-right">
+  <span class="icon ion-ios-plus-outline"></span> New
+</a>
+
+<br><br><br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th class="th-center" scope="col">Username</th>
+      <th class="th-center" scope="col">Name</th>
+      <th class="th-center" scope="col">Email</th>
+      <th class="th-center" scope="col">Admin</th>
+      <th class="th-center" scope="col">Date</th>
+      <th class="th-center" scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.forEach(function(user) { %>  
+      <tr>
+        <td class="td-center"><%= user.username %></td>
+        <td class="td-center"><%= user.name %></td>
+        <td class="td-center"><%= user.email %></td>
+        <td class="td-center"><%= user.isAdmin ? 'Si' : 'No' %></td>
+        <td class="td-center">
+          <%= moment(user.createdAt).format('DD/MM/YYYY HH:mm') %>
+        </td>
+        <td class="td-center">
+          <a href="/admin/users/<%= user._id %>/remove" class="btn btn-danger">
+            <span class="icon ion-ios-trash"></span>
+          </a>
+        </td>
+      </tr>
+    <% }) %>
+    
+  </tbody>
+</table>
+
+
+<%- include('../inc/go-back.html', {'url': '/'}); %>
+
+<%- include('../layout/footer.html'); %>

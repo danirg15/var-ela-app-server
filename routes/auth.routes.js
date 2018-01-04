@@ -1,5 +1,7 @@
-const router 			= require('express').Router()
-const passport 			= require('passport')
+const router 	    = require('express').Router()
+const isLoggedIn    = require('../middleware/isLoggedIn')
+const isAdmin       = require('../middleware/isAdmin')
+const passport 	    = require('passport')
 require('../config/passport_local')(passport)
 
 
@@ -17,10 +19,11 @@ router.get('/signup', (req, res) => {
 	res.render('auth/signup.html')
 })
 
-router.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/', // redirect to the secure profile section
+router.post('/signup', [isLoggedIn, isAdmin], passport.authenticate('local-signup', {
+    successRedirect : '/admin/users', // redirect to the secure profile section
     failureRedirect : '/signup', // redirect back to the signup page if there is an error
-    failureFlash : true // allow flash messages
+    failureFlash : true, // allow flash messages,
+    session: false //avoid auto login
 }));
 
 router.get('/logout', (req, res) => {

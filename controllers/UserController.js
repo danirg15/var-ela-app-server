@@ -24,7 +24,27 @@ module.exports = {
 
     count: (options, callback) => {
         User.count(options, callback)
+    },
+
+    createAdminUser: (callback) => {
+
+        User.findOne({'username': 'admin'}, (err, user) => {
+            if (err) {
+                throw err
+            }
+            else if (!user) {
+                let newUser = new User()
+                newUser.name = 'Admin'
+                newUser.email = 'admin@admin.com'
+                newUser.username = 'admin'
+                newUser.password = newUser.generateHash('admin')
+                newUser.isAdmin = true
+
+                newUser.save(callback)
+            }
+        })
     }
+
 
 };
 

@@ -35,12 +35,16 @@ module.exports = function(passport) {
                     return done(err);
 
                 // if no user is found, return the message
-                if (!user)
-                    return done(null, false, req.flash('message', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+                if (!user) {
+                    req.flash('status', 'error')
+                    return done(null, false, req.flash('info', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+                }
 
                 // if the user is found but the password is wrong
-                if (!user.validPassword(password))
-                    return done(null, false, req.flash('message', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+                if (!user.validPassword(password)){
+                    req.flash('status', 'error')
+                    return done(null, false, req.flash('info', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+                }
 
                 // all is well, return successful user
                 return done(null, user);
@@ -68,7 +72,8 @@ module.exports = function(passport) {
 
                 // check to see if theres already a user with that username
                 if (user) {
-                    return done(null, false, req.flash('message', 'That username is already taken.'));
+                    req.flash('status', 'error')
+                    return done(null, false, req.flash('info', 'That username is already taken.'));
                 } else {
 
                     // if there is no user with that username
@@ -80,6 +85,7 @@ module.exports = function(passport) {
                     newUser.password = newUser.generateHash(password)
                     newUser.name = req.body.name
                     newUser.email = req.body.email
+                    newUser.isAdmin = req.body.isAdmin
 
 
                     // save the user
