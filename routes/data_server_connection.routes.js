@@ -10,9 +10,13 @@ router.get('/', (req, res) => {
 router.post('/update', (req, res) => {
 	ConfigController.update(req.body, (err) => {
 		if(err) {
-			throw err
+			req.flash('status', 'error')
+			req.flash('info', 'Something went wrong1')
+			res.redirect('/data-server-connection')
 		}
 		else {
+			req.flash('status', 'success')
+			req.flash('info', 'Configuration updated')
 			res.redirect('/data-server-connection')
 		}
 	})

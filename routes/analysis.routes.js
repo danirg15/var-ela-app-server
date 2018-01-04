@@ -2,10 +2,9 @@ const axios = require('axios')
 let router = require('express').Router()
 const validate = require('express-validation');
 const validators = require('./validators');
-const data_server_endpoint = process.env.DATA_SERVER_API_ENDPOINT
 
 router.get('/', (req, res) => {
-	axios.get(data_server_endpoint+'/api/analysis')
+	axios.get(req.data_server_endpoint+'/api/analysis')
 	  .then(function (response) {
 	    res.render('analysis/index', {'analyses': response.data})
 	  })
@@ -18,11 +17,10 @@ router.get('/', (req, res) => {
 
 router.get('/:id/report', (req, res) => {
 
-	axios.get(data_server_endpoint+'/api/analysis/'+req.params.id)
+	axios.get(req.data_server_endpoint+'/api/analysis/'+req.params.id)
 	  .then(function (response) {
 	    res.render('analysis/report', {
-	    	'analysis': response.data,
-	    	'data_server_endpoint': data_server_endpoint
+	    	'analysis': response.data
 	    })
 	  })
 	  .catch(function (error) {
@@ -46,7 +44,7 @@ router.post('/create', validate(validators.analysis.full), (req, res) => {
 		'config': req.body
 	}
 
-	axios.post(data_server_endpoint+'/api/analysis', data)
+	axios.post(req.data_server_endpoint+'/api/analysis', data)
 	  .then(function (response) {
 	  	req.flash('status', 'success')
 	  	req.flash('info', 'Analysis configuration saved successfully')
@@ -62,7 +60,7 @@ router.post('/create', validate(validators.analysis.full), (req, res) => {
 
 
 router.get('/:id/select-files', (req, res) => {
-	axios.get(data_server_endpoint+'/api/fs/explore', {'params': req.query})
+	axios.get(req.data_server_endpoint+'/api/fs/explore', {'params': req.query})
 	  .then(function (response) {
 	  	res.render('analysis/form-select-files', {
 	  		'listing': response.data,
@@ -79,7 +77,7 @@ router.get('/:id/select-files', (req, res) => {
 
 
 router.post('/:id/select-files', validate(validators.analysis.select_files), (req, res) => {
-	axios.put(data_server_endpoint+'/api/analysis/'+req.params.id+'/input-files', req.body)
+	axios.put(req.data_server_endpoint+'/api/analysis/'+req.params.id+'/input-files', req.body)
 	  .then(function (response) {
 	  	req.flash('status', 'success')
 	  	req.flash('info', 'Analysis saved successfully.')
@@ -94,7 +92,7 @@ router.post('/:id/select-files', validate(validators.analysis.select_files), (re
 
 
 router.get('/:id/remove', (req, res) => {
-	axios.delete(data_server_endpoint+'/api/analysis/'+req.params.id)
+	axios.delete(req.data_server_endpoint+'/api/analysis/'+req.params.id)
 	  .then(function (response) {
 	  	req.flash('status', 'success')
 	  	req.flash('info', 'Analysis removed.')
@@ -109,7 +107,7 @@ router.get('/:id/remove', (req, res) => {
 
 
 router.get('/:id/run', (req, res) => {
-	axios.post(data_server_endpoint+'/api/analysis/'+req.params.id+'/run')
+	axios.post(req.data_server_endpoint+'/api/analysis/'+req.params.id+'/run')
 	  .then(function (response) {
 	  	req.flash('status', 'success')
 	  	req.flash('info', 'Analysis queued.')

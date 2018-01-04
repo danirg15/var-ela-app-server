@@ -35,6 +35,7 @@ app.locals.moment = require('moment')
 //Auth middlewares
 const isLoggedIn = require('./middleware/isLoggedIn')
 const isAdmin = require('./middleware/isAdmin')
+const setupConfig = require('./middleware/setupConfig')
 
 //--------------------------------------------
 //		Configuration
@@ -64,13 +65,13 @@ require('./database').connect(config.DB_URI)
 app.use(require('./routes/auth.routes'))
 
 //Admin routes
-app.use('/admin', [isLoggedIn, isAdmin], require('./routes/admin.routes')) 
+app.use('/admin', [isLoggedIn, setupConfig, isAdmin], require('./routes/admin.routes')) 
 
 //Private routes
-app.get('/', isLoggedIn, (req, res) => res.redirect('/analysis')) 
-app.use('/analysis', isLoggedIn, require('./routes/analysis.routes'))
-app.use('/sites', isLoggedIn, require('./routes/sites.routes'))
-app.use('/data-server-connection', isLoggedIn, require('./routes/data_server_connection.routes'))
+app.get('/', [isLoggedIn, setupConfig], (req, res) => res.redirect('/analysis')) 
+app.use('/analysis', [isLoggedIn, setupConfig], require('./routes/analysis.routes'))
+app.use('/sites', [isLoggedIn, setupConfig], require('./routes/sites.routes'))
+app.use('/data-server-connection', [isLoggedIn, setupConfig], require('./routes/data_server_connection.routes'))
 
 //--------------------------------------------
 //		Setup
