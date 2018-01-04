@@ -53,7 +53,7 @@ app.engine('html', ejs.renderFile)
 //--------------------------------------------
 //		DB connection
 //--------------------------------------------
-// require('./database').connect(config.DB_URI)
+require('./database').connect(config.DB_URI)
 
 
 

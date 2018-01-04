@@ -1,3 +1,3 @@
 {
-    "DB_URI": "mongodb://localhost:27017/test_test"
+    "DB_URI": "mongodb://app_mongo_database:27017/als_web_app"
 }
