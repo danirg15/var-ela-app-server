@@ -76,7 +76,10 @@ app.use('/data-server-connection', isLoggedIn, require('./routes/data_server_con
 //		Setup
 //--------------------------------------------
 const UserController = require('./controllers/UserController')
+const ConfigController = require('./controllers/ConfigController')
+
 UserController.createAdminUser((err) => { console.log(err) })
+ConfigController.createDefaultConfig((err) => { console.log(err) })
 
 
 //--------------------------------------------

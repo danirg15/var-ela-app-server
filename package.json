@@ -4,8 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "run": "forever start server.js",
-    "start": "nodemon server",
+    "start": "nodemon server"
   },
   "author": "dani",
   "license": "ISC",

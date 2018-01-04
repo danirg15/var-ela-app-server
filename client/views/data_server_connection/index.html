@@ -4,23 +4,23 @@
 <h1 class="head-title">Data Server Connection</h1>
 
 
-<form>
+<form method="POST" action="/data-server-connection/update">
   <div class="form-group row">
     <label for="host" class="col-sm-2 col-form-label">Host</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="host" name="host" placeholder="" value="http://localhost">
+      <input type="text" class="form-control" id="host" name="host" placeholder="" value="<%= config.host %>">
     </div>
   </div>
   <div class="form-group row">
     <label for="port" class="col-sm-2 col-form-label">Port</label>
     <div class="col-sm-10">
-      <input type="number" class="form-control" id="port" name="port" placeholder="" value="5000">
+      <input type="number" class="form-control" id="port" name="port" placeholder="" value="<%= config.port %>">
     </div>
   </div>
   <div class="form-group row">
     <label for="api_key" class="col-sm-2 col-form-label">API Key</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="">
+      <input type="text" class="form-control" name="key" placeholder="" value="<%= config.key %>">
     </div>
   </div>
   
