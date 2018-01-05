@@ -8,22 +8,15 @@ $("#test-connection").click(function() {
     var port = $('#port').val()
     var url = host + ':' + port
 
-    var sendDate = (new Date()).getTime();
+    window.location = '/data-server-connection/test-connection?host=' + host + '&port=' + port
 
-    $.ajax({
-       type: 'HEAD',
-       url: url,
-       success: function(data) {
-          var receiveDate = (new Date()).getTime();
-          var responseTimeMs = receiveDate - sendDate
-
-          alert(url + ': Success. Response Time: ' + responseTimeMs + 'ms')
-       },
-       error: function() {
-          alert(url + ': Fail')
-       }
-    });
-
+    // $.get('/data-server-connection/test-connection',  {
+    //   'host': host,
+    //   'port': port
+    // }, function(res) {
+    //   console.log(res)
+    // })
+  
 }) 
 
 

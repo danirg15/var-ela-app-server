@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
 	    res.render('analysis/index', {'analyses': response.data})
 	  })
 	  .catch(function (error) {
+	  	console.log(error)
 	  	req.flash('status', 'error')
 	  	req.flash('info', 'Cannot retrieve analyses from data server. Check out connection.')
 	    res.render('analysis/index', {'analyses': []})

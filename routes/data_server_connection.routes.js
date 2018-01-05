@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const axios = require('axios')
 const ConfigController = require('../controllers/ConfigController')
 
 router.get('/', (req, res) => {
@@ -20,6 +21,28 @@ router.post('/update', (req, res) => {
 			res.redirect('/data-server-connection')
 		}
 	})
+})
+
+
+router.get('/test-connection', (req, res) => {
+	const endpoint = req.query.host + ':' + req.query.port
+
+	const sendDate = (new Date()).getTime()
+
+	axios.head(endpoint)
+	  .then(function (response) {
+	  	const receiveDate = (new Date()).getTime()
+	  	const responseTimeMs = receiveDate - sendDate
+
+	    req.flash('status', 'success')
+	    req.flash('info', 'Success - response: ' + responseTimeMs + 'ms')
+	    res.redirect('/data-server-connection')
+	  })
+	  .catch(function (error) {
+	  		req.flash('status', 'error')
+	  		req.flash('info', 'Error: ' + error)
+	  		res.redirect('/data-server-connection')
+	  })
 })
 
 module.exports = router;
