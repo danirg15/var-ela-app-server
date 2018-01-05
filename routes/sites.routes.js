@@ -5,7 +5,7 @@ const validators = require('./validators');
 const data_server_endpoint = process.env.DATA_SERVER_API_ENDPOINT
 
 router.get('/', (req, res) => {
-	axios.get(data_server_endpoint+'/api/sites', {'params': req.query})
+	axios.get(req.data_server_endpoint+'/api/sites', {'params': req.query})
 	  .then(function (response) {
 	    res.render('sites/list', {'sites': response.data})
 	  })
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 
 router.get('/detail/:id', (req, res) => {
-	axios.get(data_server_endpoint+'/api/sites/'+req.params.id)
+	axios.get(req.data_server_endpoint+'/api/sites/'+req.params.id)
 	  .then(function (response) {
 	    res.render('sites/detail', {'site': response.data})
 	  })

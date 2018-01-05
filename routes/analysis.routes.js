@@ -9,7 +9,6 @@ router.get('/', (req, res) => {
 	    res.render('analysis/index', {'analyses': response.data})
 	  })
 	  .catch(function (error) {
-	  	console.log(error)
 	  	req.flash('status', 'error')
 	  	req.flash('info', 'Cannot retrieve analyses from data server. Check out connection.')
 	    res.render('analysis/index', {'analyses': []})
@@ -21,7 +20,8 @@ router.get('/:id/report', (req, res) => {
 	axios.get(req.data_server_endpoint+'/api/analysis/'+req.params.id)
 	  .then(function (response) {
 	    res.render('analysis/report', {
-	    	'analysis': response.data
+	    	'analysis': response.data,
+	    	'data_server_endpoint': req.data_server_endpoint
 	    })
 	  })
 	  .catch(function (error) {

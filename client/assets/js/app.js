@@ -8,15 +8,7 @@ $("#test-connection").click(function() {
     var port = $('#port').val()
     var url = host + ':' + port
 
-    window.location = '/data-server-connection/test-connection?host=' + host + '&port=' + port
-
-    // $.get('/data-server-connection/test-connection',  {
-    //   'host': host,
-    //   'port': port
-    // }, function(res) {
-    //   console.log(res)
-    // })
-  
+    window.location = '/data-server-connection/test-connection?host=' + host + '&port=' + port  
 }) 
 
 
@@ -49,7 +41,7 @@ $('#search-sites').click(function() {
 
             var field = param.split(operator)[0].trim()
             var value = param.split(operator)[1].trim()
-            query[field.toUpperCase()] = value
+            query[field.toUpperCase()] = operator + ',' + value
         })
     }
         

@@ -8,7 +8,6 @@ module.exports = (req, res, next) => {
 		//We make available the config in the next request in order to know
 		//data server connection params
 		req.data_server_endpoint = config.host +':'+ config.port
-		console.log(req.data_server_endpoint) 
 	    return next()
 	})
 
