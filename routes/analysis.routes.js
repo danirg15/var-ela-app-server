@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 	  })
 	  .catch(function (error) {
 	  	req.flash('status', 'error')
-	  	req.flash('info', 'Cannot retrieve analyses from data server. Check out connection.')
+	  	req.flash('info', 'Cannot retrieve analyses from data server. Check out connection. ' + error)
 	    res.render('analysis/index', {'analyses': []})
 	  });
 })
@@ -26,7 +26,7 @@ router.get('/:id/report', (req, res) => {
 	  })
 	  .catch(function (error) {
 	  	req.flash('status', 'error')
-	  	req.flash('info', 'Cannot retrieve analysis from data server. Check out connection.')
+	  	req.flash('info', 'Cannot retrieve analysis from data server. Check out connection. ' + error)
 	    res.render('analysis/index', {'analyses': []})
 	  });
 
@@ -71,7 +71,7 @@ router.get('/:id/select-files', (req, res) => {
 	  })
 	  .catch(function (error) {
 	  	req.flash('status', 'error')
-	  	req.flash('info', 'Cannot retrieve files from data server. Check out connection.')
+	  	req.flash('info', 'Cannot retrieve files from data server. Check out connection. ' + error)
 	    res.redirect('/')
 	  });
 })
@@ -101,7 +101,7 @@ router.get('/:id/remove', (req, res) => {
 	  })
 	  .catch(function (error) {
 	  	req.flash('status', 'error')
-	  	req.flash('info', 'Cannot remove. Check out connection.')
+	  	req.flash('info', 'Cannot remove. Check out connection.' + error)
 	    res.redirect('/')
 	  });
 })
@@ -116,7 +116,7 @@ router.get('/:id/run', (req, res) => {
 	  })
 	  .catch(function (error) {
 	  	req.flash('status', 'error')
-	  	req.flash('info', 'Cannot run analysis. Check out connection.')
+	  	req.flash('info', 'Cannot run analysis. Check out connection.' + error)
 	    res.redirect('/')
 	  });
 })

@@ -25,11 +25,9 @@ router.post('/update', (req, res) => {
 
 
 router.get('/test-connection', (req, res) => {
-	const endpoint = req.query.host + ':' + req.query.port
-
 	const sendDate = (new Date()).getTime()
 
-	axios.head(endpoint)
+	axios.head(req.data_server_endpoint)
 	  .then(function (response) {
 	  	const receiveDate = (new Date()).getTime()
 	  	const responseTimeMs = receiveDate - sendDate
