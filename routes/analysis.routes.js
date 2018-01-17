@@ -21,7 +21,8 @@ router.get('/:id/report', (req, res) => {
 	  .then(function (response) {
 	    res.render('analysis/report', {
 	    	'analysis': response.data,
-	    	'data_server_endpoint': req.data_server_endpoint
+	    	'data_server_endpoint': req.data_server_endpoint,
+	    	'fake_endpoint': 'http://localhost:5000'
 	    })
 	  })
 	  .catch(function (error) {
