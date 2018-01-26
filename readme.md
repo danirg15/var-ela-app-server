@@ -1,4 +1,4 @@
-# VAR ELA
+# VAR ELA Web Client
 
 It's an implementation of a web client to define and launch genomic analyses against the [var-ela-data-server](https://gitlab.com/dani.rg15/var-ela-data-server ""), which is intended to perform the jobs in a remote machine such as grid computing centers, or similar.
 
