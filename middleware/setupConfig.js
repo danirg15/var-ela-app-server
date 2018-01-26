@@ -13,6 +13,9 @@ module.exports = (req, res, next) => {
 		//We asign to axios objetct the auth header, so its used in every request
 		axios.defaults.headers.common['api_key'] = config.key
 
+		//Timeout
+		axios.defaults.timeout = 5000 //5 secs
+
 	    return next()
 	})
 
